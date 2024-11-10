@@ -60,7 +60,7 @@ exports.addAdditionalData = async (req, res) => {
         }
 
         const updatedLog = await Log.findByIdAndUpdate(
-            { _id: userId },
+            userId,
             { $set: { additionalData: { ...additionalData } } },
             { new: true }
         );
@@ -69,14 +69,14 @@ exports.addAdditionalData = async (req, res) => {
             return res.status(404).send("Log entry not found.");
         }
 
-        const newLog = new Log({
-            actionType: 'Action',
-            userId: req.user._id,
-            role: req.user.role,
-            additionalData: getAdditionalData(req),
-        });
+        // const newLog = new Log({
+        //     actionType: 'Action',
+        //     userId: req.user._id,
+        //     role: req.user.role,
+        //     additionalData: additionalData,
+        // });
 
-        await newLog.save();
+        // await newLog.save();
 
         res.json(updatedLog);
     } catch (error) {
@@ -89,7 +89,7 @@ exports.deleteAdditionalData = async (req, res) => {
         const { userId, key } = req.params;
 
         const updatedLog = await Log.findByIdAndUpdate(
-            { _id: userId },
+            userId,
             { $unset: { [`additionalData.${key}`]: "" } },
             { new: true }
         );
@@ -98,14 +98,14 @@ exports.deleteAdditionalData = async (req, res) => {
             return res.status(404).send("Log entry not found.");
         }
 
-        const newLog = new Log({
-            actionType: 'Action',
-            userId: req.user._id,
-            role: req.user.role,
-            additionalData: getAdditionalData(req),
-        });
+        // const newLog = new Log({
+        //     actionType: 'Action',
+        //     userId: req.user._id,
+        //     role: req.user.role,
+        //     additionalData: getAdditionalData(req),
+        // });
 
-        await newLog.save();
+        // await newLog.save();
 
         res.json(updatedLog);
     } catch (error) {

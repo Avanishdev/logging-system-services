@@ -48,7 +48,7 @@ JWT_SECRET=
 1. Make sure you are in the main project directory (logging-system-services), and then start the Node application with:
 
    ```bash
-   npm run dev
+   npm start
    ```
 
 Or
